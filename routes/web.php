@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 */
 Auth::routes();
 
-Route::get('/', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
+Route::get('/', ['as' => 'blog.index', 'uses' => 'BlogController@index', 'middleware' => ['auth', 'can:isAdmin']],);
 Route::get('/{category}', ['as' => 'blog.category', 'uses' => 'BlogController@category']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], function () {

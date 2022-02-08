@@ -50,7 +50,7 @@ class SourceController extends Controller
             'description'          => 'required',
         ]);
 
-        $source = Source::create($validatedData);
+        $source->update($validatedData);
         return redirect()->route('sources.edit', $source->id)
             ->with('success','Источник обновлен');
     }

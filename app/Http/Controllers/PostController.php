@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Models\Category;
 use App\Models\Post;
@@ -64,9 +65,10 @@ class PostController extends Controller
             'category_id'   => 'required|numeric',
             'status'   => 'in:public,draft,visible',
         ]);
+
         $post = Post::create($validatedData);
 
-        return redirect()->route('post.create')
+        return redirect()->route('post.index')
             ->with('success', 'Post успешно добавлен');;
     }
 

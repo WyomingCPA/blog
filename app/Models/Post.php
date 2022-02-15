@@ -18,4 +18,9 @@ class Post extends Model
     {
       return $this->hasMany(Source::class);
     }
+
+    public function photo()
+    {
+      return $this->hasOne(Photo::class);
+    }
 }

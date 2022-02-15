@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', ['as' => 'blog.index', 'uses' => 'BlogController@index', 'middleware' => ['auth', 'can:isAdmin']],);
+Route::get('/post/{post}', ['as' => 'blog.view', 'uses' => 'BlogController@view', 'middleware' => ['auth', 'can:isAdmin']],);
+
 Route::get('/{category}', ['as' => 'blog.category', 'uses' => 'BlogController@category']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], function () {
@@ -35,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], fun
         Route::post('store', ['as' => 'post.store', 'uses' => 'PostController@store']);
         Route::post('update/{post}', ['as' => 'post.update', 'uses' => 'PostController@update']);
         Route::post('delete/{post}', ['as' => 'post.delete', 'uses' => 'PostController@delete']);
+        Route::post('save/{post}', ['as' => 'post.image.save', 'uses' => 'UploadImageController@save']);
     });
     Route::group(['prefix' => 'sources',], function () {
         Route::get('{post}', ['as' => 'sources.index', 'uses' => 'SourceController@view']);

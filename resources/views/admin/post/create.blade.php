@@ -7,6 +7,11 @@
         plugins: "codesample",
         height: "680"
     });
+    tinymce.init({
+        selector: '#preview',
+        plugins: "codesample",
+        height: "200"
+    });
 </script>
 @endsection
 @section('content')
@@ -44,6 +49,11 @@
                             <input type="text" class="form-control" id="slug" name="slug">
                         </div>
                         <div class="mb-3">
+                            <label class="input-group-text" for="preview">Краткое содержание</label>
+                            <textarea class="form-control" id="preview" name="preview"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="input-group-text" for="content">Текст статьи</label>
                             <textarea class="form-control" id="content" name="text"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>

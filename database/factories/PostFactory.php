@@ -18,6 +18,7 @@ class PostFactory extends Factory
             'title' => $this->faker->name,
             'slug' => Str::slug($this->faker->name),
             'text' => $this->faker->text,
+            'preview' => $this->faker->text,
             'user_id'   => 1,
             'category_id'   => 1,
         ];

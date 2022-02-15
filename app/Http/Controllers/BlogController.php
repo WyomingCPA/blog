@@ -11,7 +11,13 @@ class BlogController extends Controller
 {
     public function index(Request $reqeust)
     {
-        return view('blog.index', []);
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(10);
+        return view('blog.index', compact('posts',));
+    }
+
+    public function view(Request $request, Post $post)
+    {
+        return view('blog.post.detail', compact('post'));
     }
 
     public function category(Request $reqeust, Category $category)

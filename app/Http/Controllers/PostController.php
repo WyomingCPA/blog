@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Category;
 use App\Models\Post;
@@ -50,6 +51,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+
+        $test2 = Storage::url($post->photo->path);
         return view('admin.post.edit', compact('post', 'categories'));
     }
 

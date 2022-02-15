@@ -5,8 +5,12 @@
     tinymce.init({
         selector: '#content',
         plugins: "codesample, toc, autosave, wordcount",
-        height : "680"
+        height: "680"
     });
+
+    function preview() {
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
 </script>
 @endsection
 @section('content')
@@ -56,6 +60,20 @@
                             <textarea class="form-control" id="content" name="text">{{ $post->text }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Обновить</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" action="{{ route('post.image.save', $post->id ) }}">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" id="image" name="image" onchange="preview()">
+                        </div>
+                        <div class="input-group mb-3">
+                            <img id="frame" src="{{ url('/storage/images/' . $post->photo->path) }}" class="img-fluid" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
                     </form>
                 </div>
             </div>

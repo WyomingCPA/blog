@@ -71,7 +71,10 @@
                             <input type="file" class="form-control" id="image" name="image" onchange="preview()">
                         </div>
                         <div class="input-group mb-3">
+                            @if(!is_null($post->photo))
                             <img id="frame" src="{{ url('/storage/images/' . $post->photo->path) }}" class="img-fluid" />
+                            @endif
+                            
                         </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>
                     </form>

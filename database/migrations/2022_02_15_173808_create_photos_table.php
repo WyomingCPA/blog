@@ -21,6 +21,7 @@ class CreatePhotosTable extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->string('path');
+            $table->boolean('is_thumbnail')->deafult(false);
             $table->timestamps();
         });
     }

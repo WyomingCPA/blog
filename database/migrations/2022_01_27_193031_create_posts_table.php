@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->text('text')->nullable();
             $table->unsignedBigInteger('views')->nullable();
             $table->enum('status', ['public', 'draft', 'visible']);
+            $table->time('reading_time', $precision = 0);
             $table->timestamps();
         });
     }

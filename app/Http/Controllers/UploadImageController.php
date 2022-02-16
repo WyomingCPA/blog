@@ -24,6 +24,7 @@ class UploadImageController extends Controller
         $save->name = $name;
         $save->path = basename($path);
         $save->post_id = $post->id;
+        $save->is_thumbnail = true;
         $save->save();
 
         return redirect()->route('post.edit', $post->id)

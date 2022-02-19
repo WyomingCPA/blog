@@ -31,18 +31,24 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $request->request->add(['user_id' => 0]);
+        $id = auth()->user()->id;
 
-        $validatedData = $this->validate($request, [
+        $request->request->add(['user_id' => $id]);
+        $request->request->add(['reading_time' => '00:00']);
+
+        $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
-            'slug'          => 'required|min:3|max:255',
-            'text'          => 'required',
+            'text'          => 'nullable',
             'user_id'   => 'required|numeric',
             'category_id'   => 'required|numeric',
             'status'   => 'in:public,draft,visible',
         ]);
 
-        $post->update($validatedData);
+        if($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData);
+        }
+
+        $post->update($request->all());
 
         return redirect()->route('post.edit', $post->id)
             ->with('success', 'Пост успешно обновлен');
@@ -56,18 +62,25 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $request->request->add(['user_id' => 0]);
-
-        $validatedData = $this->validate($request, [
+        $id = auth()->user()->id;
+        $request->request->add(['user_id' => $id]);
+        $request->request->add(['slug' => Str::slug($request->title)]);
+        $request->request->add(['reading_time' => '00:00']);
+        
+        $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
             'slug'          => 'required|min:3|max:255|unique:posts',
-            'text'          => 'required',
+            'text'          => 'nullable',
             'user_id'   => 'required|numeric',
             'category_id'   => 'required|numeric',
             'status'   => 'in:public,draft,visible',
         ]);
+        
+        if($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData);
+        }
 
-        $post = Post::create($validatedData);
+        $post = Post::create($request->all());
 
         return redirect()->route('post.index')
             ->with('success', 'Post успешно добавлен');;

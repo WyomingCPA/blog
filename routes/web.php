@@ -37,7 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], fun
         Route::post('store', ['as' => 'post.store', 'uses' => 'PostController@store']);
         Route::post('update/{post}', ['as' => 'post.update', 'uses' => 'PostController@update']);
         Route::post('delete/{post}', ['as' => 'post.delete', 'uses' => 'PostController@delete']);
-        Route::post('save/{post}', ['as' => 'post.image.save', 'uses' => 'UploadImageController@save']);
+        Route::post('save/{post}', ['as' => 'post.image.save', 'uses' => 'UploadImageController@saveThumbnails']);
     });
     Route::group(['prefix' => 'sources',], function () {
         Route::get('{post}', ['as' => 'sources.index', 'uses' => 'SourceController@view']);

@@ -50,14 +50,38 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="title">Заголовок</label>
-                            <input value="{{ $post->title }}" type="text" class="form-control" id="title" name="title">
+                            <input value="{{ $post->title }}" type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : ''}}" id="title" name="title">
+                            @if ($errors->has('title'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('title') }}
+                            </div>
+                            @endif
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="slug">Slug</label>
-                            <input value="{{ $post->slug }}" type="text" class="form-control" id="slug" name="slug">
+                            <input value="{{ $post->slug }}" type="text" class="form-control {{ $errors->has('slug') ? 'is-invalid' : ''}}" id="slug" name="slug">
+                            @if ($errors->has('slug'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('slug') }}
+                            </div>
+                            @endif
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" id="content" name="text">{{ $post->text }}</textarea>
+                            <label class="input-group-text" for="preview">Краткое содержание</label>
+                            <textarea class="form-control {{ $errors->has('preview') ? 'is-invalid' : ''}}" id="preview" name="preview"></textarea>
+                            @if ($errors->has('preview'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('preview') }}
+                            </div>
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="content" name="text">{{ $post->text }}</textarea>
+                            @if ($errors->has('text'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('text') }}
+                            </div>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Обновить</button>
                     </form>
@@ -72,9 +96,8 @@
                         </div>
                         <div class="input-group mb-3">
                             @if(!is_null($post->photo))
-                            <img id="frame" src="{{ url('/storage/images/' . $post->photo->path) }}" class="img-fluid" />
-                            @endif
-                            
+                            <img id="frame" src="{{ url('/storage/images/thumbnails/' . $post->photo->path) }}" class="img-fluid" />
+                            @endif                          
                         </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>
                     </form>

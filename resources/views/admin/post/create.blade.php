@@ -42,19 +42,39 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="title">Заголовок</label>
-                            <input type="text" class="form-control" id="title" name="title">
+                            <input type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : ''}}" id=" title" name="title">
+                            @if ($errors->has('title'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('title') }}
+                            </div>
+                            @endif
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="slug">Slug</label>
-                            <input type="text" class="form-control" id="slug" name="slug">
+                            <input type="text" class="form-control {{ $errors->has('slug') ? 'is-invalid' : ''}}" id="slug" name="slug">
+                            @if ($errors->has('slug'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('slug') }}
+                            </div>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label class="input-group-text" for="preview">Краткое содержание</label>
-                            <textarea class="form-control" id="preview" name="preview"></textarea>
+                            <textarea class="form-control {{ $errors->has('preview') ? 'is-invalid' : ''}}" id="preview" name="preview"></textarea>
+                            @if ($errors->has('preview'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('preview') }}
+                            </div>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label class="input-group-text" for="content">Текст статьи</label>
-                            <textarea class="form-control" id="content" name="text"></textarea>
+                            <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : ''}}" id="content" name="text"></textarea>
+                            @if ($errors->has('text'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('text') }}
+                            </div>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>
                     </form>

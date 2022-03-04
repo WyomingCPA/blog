@@ -16,6 +16,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Words</th>
+                                <th scope="col">Прирост слов</th>
                                 <th scope="col">Last Update</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Actions</th>
@@ -27,6 +28,7 @@
                                 <th scope="row">{{ $post->id }}</th>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->words }}</td>
+                                <td>{{ $post->difference_point }}</td>
                                 <td>{{ $post->updated_at }}</td>
                                 <td>{{ $post->status }}</td>
                                 <td>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Word;
 
 class PostController extends Controller
 {
@@ -44,11 +45,19 @@ class PostController extends Controller
             'status'   => 'in:public,draft,visible',
         ]);
 
-        if($validatedData->fails()) {
+        if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData);
         }
 
         $post->update($request->all());
+
+        $stripped = strip_tags($request->text);
+        $decoded  = html_entity_decode($stripped);
+        $count_word =  str_word_count($decoded);
+        $word = Word::create([
+            'post_id' => $post->id,
+            'count_word' => $count_word,
+        ]);
 
         return redirect()->route('post.edit', $post->id)
             ->with('success', 'Пост успешно обновлен');
@@ -66,7 +75,7 @@ class PostController extends Controller
         $request->request->add(['user_id' => $id]);
         $request->request->add(['slug' => Str::slug($request->title)]);
         $request->request->add(['reading_time' => '00:00']);
-        
+
         $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
             'slug'          => 'required|min:3|max:255|unique:posts',
@@ -75,8 +84,8 @@ class PostController extends Controller
             'category_id'   => 'required|numeric',
             'status'   => 'in:public,draft,visible',
         ]);
-        
-        if($validatedData->fails()) {
+
+        if ($validatedData->fails()) {
             return redirect()->back()->withErrors($validatedData);
         }
 

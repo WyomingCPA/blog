@@ -46,7 +46,7 @@
     </main>
 
     <footer class="blog-footer">
-
+    <p>&copy; 2021-{{ date('Y') }}</p>
     </footer>
 
     <!-- Bootstrap 5 Javascript -->

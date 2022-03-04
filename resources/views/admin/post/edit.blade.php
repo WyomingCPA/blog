@@ -4,8 +4,8 @@
 <script type="text/javascript">
     tinymce.init({
         selector: '#content',
-        plugins: "codesample, toc, autosave, wordcount",
-        height: "680"
+        plugins: "codesample, toc, autosave, wordcount, link",
+        height: "680",
     });
 
     function preview() {

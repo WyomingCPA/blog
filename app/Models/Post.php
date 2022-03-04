@@ -23,4 +23,14 @@ class Post extends Model
     {
       return $this->hasOne(Photo::class);
     }
+
+    public function getWordsAttribute()
+    {
+        $model = Word::where('post_id', '=', $this->id)->orderBy('created_at', 'desc')->first();
+        if (isset($model))
+        {
+          return $model->count_word;
+        }
+        return 0;    
+    }
 }

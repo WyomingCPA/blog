@@ -4,7 +4,8 @@
 <script type="text/javascript">
     tinymce.init({
         selector: '#content',
-        plugins: "codesample, toc, autosave, wordcount, link",
+        plugins: "codesample, toc, autosave, wordcount, link, lists",
+        toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
         height: "680",
     });
 

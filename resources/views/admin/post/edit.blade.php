@@ -26,6 +26,7 @@
                         <p>{{ $message }}</p>
                     </div>
                     @endif
+                    <!---<a href="{{ route('blog.view', $post->id) }}" class="stretched-link" target="_blank">Смотреть</a> --->
                     <form method="post" action="{{ route('post.update', $post->id ) }}">
                         @csrf
                         <div class="input-group mb-3">

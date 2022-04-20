@@ -17,7 +17,7 @@ Auth::routes();
 Route::get('/', ['as' => 'blog.index', 'uses' => 'BlogController@index', 'middleware' => ['auth', 'can:isAdmin']],);
 Route::get('/post/{post}', ['as' => 'blog.view', 'uses' => 'BlogController@view', 'middleware' => ['auth', 'can:isAdmin']],);
 
-Route::get('/{category}', ['as' => 'blog.category', 'uses' => 'BlogController@category']);
+Route::get('/category/{category}', ['as' => 'blog.category', 'uses' => 'BlogController@category']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], function () {
     Route::get('/', ['as' => 'admin.index', 'uses' => 'AdminController@index']);
@@ -28,6 +28,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:isAdmin']], fun
         Route::get('edit/{category}', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
         Route::post('update/{category}', ['as' => 'category.update', 'uses' => 'CategoryController@update']);
         Route::post('delete/{category}', ['as' => 'category.delete', 'uses' => 'CategoryController@delete']);
+    });
+    Route::group(['prefix' => 'dashboard',], function () {
+        Route::get('index', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);
     });
     Route::group(['prefix' => 'post',], function () {
         Route::get('index', ['as' => 'post.index', 'uses' => 'PostController@index']);

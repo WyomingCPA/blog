@@ -1,11 +1,21 @@
-<div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="width: 280px;">
+<div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" id="navbarSupportedContent">
   <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
     <svg class="bi me-2" width="30" height="24">
       <use xlink:href="#bootstrap" />
     </svg>
-    <span class="fs-5 fw-semibold">Collapsible</span>
+    <span class="fs-5 fw-semibold">Admin Panel</span>
   </a>
   <ul class="list-unstyled ps-0">
+    <li class="mb-1">
+      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+        Dashboard
+      </button>
+      <div class="collapse" id="dashboard-collapse">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+          <li><a href="{{ route('dashboard.index') }}" class="link-dark rounded">Главная</a></li>
+        </ul>
+      </div>
+    </li>
     <li class="mb-1">
       <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#post-collapse" aria-expanded="false">
         Post

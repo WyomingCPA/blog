@@ -28,7 +28,7 @@
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-start">
                 @foreach ($categories as $category)
-                <a class="p-2 link-secondary" href="#">{{ $category->title }}</a>
+                <a class="p-2 link-secondary" href="{{ route('blog.category', $category->id) }}">{{ $category->title }}</a>
                 @endforeach
             </nav>
         </div>

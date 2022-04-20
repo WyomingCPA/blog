@@ -92,7 +92,7 @@ class PostController extends Controller
         $post = Post::create($request->all());
 
         return redirect()->route('post.index')
-            ->with('success', 'Post успешно добавлен');;
+            ->with('success', 'Post успешно добавлен');
     }
 
     public function delete(Post $post)

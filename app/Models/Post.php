@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Post extends Model
 {
   use HasFactory;
@@ -13,7 +15,7 @@ class Post extends Model
 
   public function category()
   {
-    return $this->belongsTo('App\Models\Category');
+    return $this->belongsTo(Category::class);
   }
   public function sources()
   {
@@ -32,6 +34,10 @@ class Post extends Model
       return $model->count_word;
     }
     return 0;
+  }
+  public function getUpdatedAtAttribute($value)
+  {
+      return Carbon::parse($value)->format('H:i:s j F Y');
   }
   //Список участников на разный промежуток времени
   public function getDifferencePointAttribute()

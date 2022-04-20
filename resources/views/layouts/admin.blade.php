@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
-
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +13,7 @@
 
         <!-- Custom styles for this template with bootstrap css -->
 
-        <link rel="stylesheet" href={{ asset('css/app.min.css') }}>
+        <link rel="stylesheet" href={{ asset('css/admin/admin.css') }}>
         @yield('style')
         <style type="text/css">
             .sidebar {

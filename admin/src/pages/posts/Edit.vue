@@ -58,7 +58,7 @@
                       id="content"
                       api-key="no-api-key"
                       v-model="content"
-                      value=""
+                      value="content"
                       :init="{
                         height: 700,
                         menubar: true,
@@ -148,7 +148,7 @@ export default {
           .post("/api/posts/update", {
             post_id: this.$route.params.id,
             title: self.title,
-            content: self.content,
+            text: self.content,
             slug: self.slug,
             preview: self.preview,
             category_id: self.selectedCategory,
@@ -156,25 +156,6 @@ export default {
           })
           .then((response) => {
             if (response.status) {
-              this.$snotify.async(
-                "Called with promise",
-                "Success async",
-                () =>
-                  new Promise((resolve, reject) => {
-                    setTimeout(
-                      () =>
-                        resolve({
-                          title: "Success!!!",
-                          test: reject,
-                          body: "We got an example success!",
-                          config: {
-                            closeOnClick: true,
-                          },
-                        }),
-                      2000
-                    );
-                  })
-              );
               console.log("Вызвали алерт");
             } else {
               console.log("Не работает");

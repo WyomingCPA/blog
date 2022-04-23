@@ -70,7 +70,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="input-group-text" for="preview">Краткое содержание</label>
-                            <textarea class="form-control {{ $errors->has('preview') ? 'is-invalid' : ''}}" id="preview" name="preview"></textarea>
+                            <textarea class="form-control {{ $errors->has('preview') ? 'is-invalid' : ''}}" id="preview" name="preview">{{ $post->preview }}</textarea>
                             @if ($errors->has('preview'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('preview') }}

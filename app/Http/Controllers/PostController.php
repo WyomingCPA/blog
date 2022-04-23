@@ -39,6 +39,7 @@ class PostController extends Controller
 
         $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
+            'preview'       => 'nullable',
             'text'          => 'nullable',
             'user_id'   => 'required|numeric',
             'category_id'   => 'required|numeric',
@@ -79,6 +80,7 @@ class PostController extends Controller
         $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
             'slug'          => 'required|min:3|max:255|unique:posts',
+            'preview'       => 'nullable',
             'text'          => 'nullable',
             'user_id'   => 'required|numeric',
             'category_id'   => 'required|numeric',

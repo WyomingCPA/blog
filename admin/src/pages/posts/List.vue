@@ -110,6 +110,16 @@ export default {
           // Variant applies to the whole column, including the header and footer
         },
         {
+          key: "status",
+          label: "Статус",
+          sortable: true,
+        },
+        {
+          key: "total_sources",
+          label: "Кол-во источников",
+          sortable: true,
+        },
+        {
           key: "updated_at",
           label: "Последнее обновление",
           sortable: true,

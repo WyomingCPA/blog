@@ -12,14 +12,21 @@ class Post extends Model
   use HasFactory;
 
   protected $fillable = ['user_id', 'category_id', 'title', 'slug', 'text', 'preview', 'status', 'reading_time'];
+  protected $appends = ['words', 'difference_point', 'total_sources'];
 
   public function category()
   {
     return $this->belongsTo(Category::class);
   }
+
   public function sources()
   {
     return $this->hasMany(Source::class);
+  }
+
+  public function getTotalSourcesAttribute()
+  {
+    return $this->relationLoaded('sources') ? $this->sources->count() : $this->sources()->count();
   }
 
   public function photo()
@@ -37,7 +44,7 @@ class Post extends Model
   }
   public function getUpdatedAtAttribute($value)
   {
-      return Carbon::parse($value)->format('H:i:s j F Y');
+    return Carbon::parse($value)->format('H:i:s j F Y');
   }
   //Список участников на разный промежуток времени
   public function getDifferencePointAttribute()

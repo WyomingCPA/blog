@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Word;
 
 class PostController extends Controller
 {
@@ -27,6 +28,7 @@ class PostController extends Controller
         $validatedData = validator()->make($request->all(), [
             'title'         => 'required|min:3|max:255',
             'slug'          => 'required|min:3|max:255|unique:posts',
+            'preview'       => 'nullable',
             'text'          => 'nullable',
             'user_id'   => 'required|numeric',
             'category_id'   => 'required|numeric',
@@ -65,11 +67,24 @@ class PostController extends Controller
         $post = Post::findOrFail($request->post_id);
         $post->update([
             'title' => $request->title,
+            'preview'       => 'nullable',
             'text' => $request->text,
             'category_id' => $request->category_id,
             'status' => $request->status,
             'preview' => $request->preview,
         ]);
+        
+        $stripped = strip_tags($request->text);
+        $decoded  = html_entity_decode($stripped);
+        $count_word =  str_word_count($decoded);
+        $word = Word::create([
+            'post_id' => $post->id,
+            'count_word' => $count_word,
+        ]);
+
+        return response([
+            'status' => true,
+        ], 200);
     }
 
     public function delete(Request $request)

@@ -10,4 +10,5 @@ class Word extends Model
     use HasFactory;
 
     protected $fillable = ['post_id', 'count_word'];
+
 }

@@ -18,6 +18,14 @@ axios.defaults.baseURL = 'http://simpleitrunner.ru/';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status !== 419) return Promise.reject(error);
+  window.location.reload();
+});
+
+
 store.dispatch('me').then(() => {
   new Vue({
     router,

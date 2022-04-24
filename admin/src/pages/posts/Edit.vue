@@ -143,6 +143,7 @@ export default {
     },
     async update() {
       let self = this;
+      this.loading = true;
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/posts/update", {
@@ -157,6 +158,7 @@ export default {
           .then((response) => {
             if (response.status) {
               console.log("Вызвали алерт");
+              
             } else {
               console.log("Не работает");
               console.log(response.status);

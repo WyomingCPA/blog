@@ -24,6 +24,13 @@
             <div class="row">
               <div class="col-12">
                 <div class="preview-list">
+                  <div class="text-center">
+                    <b-spinner
+                      v-show="loading"
+                      variant="primary"
+                      label="Text Centered"
+                    ></b-spinner>
+                  </div>
                   <div
                     class="preview-item border-bottom py-3"
                     v-for="item in items"
@@ -36,7 +43,9 @@
                     </div>
                     <div class="preview-item-content d-sm-flex flex-grow">
                       <div class="flex-grow">
-                        <h6 class="preview-subject">{{ item.name }}</h6>
+                        <a :href="item.source" target="_blank"
+                          ><h6 class="preview-subject">{{ item.name }}</h6></a
+                        >
                         <p class="mb-0" v-html="item.description"></p>
                       </div>
                       <div class="mr-auto text-sm-right pt-2 pt-sm-0">
@@ -77,19 +86,23 @@ export default {
     return {
       idSource: "",
       items: Array,
+      loading: false,
     };
   },
   methods: {
     getSources() {
       let self = this;
+      this.loading = true;
       axios
         .get("/api/sources/source/" + this.$route.params.id)
         .then(function (response) {
           self.items = response.data.sources;
           console.log(response.data.sources);
+          self.loading = false;
         })
         .catch(function (error) {
           console.error(error);
+          self.loading = false;
         });
     },
     editSource(id) {

@@ -53,8 +53,15 @@
                   </b-form-group>
                   <div class="d-flex">
                     <b-button type="submit" variant="success" class="mr-2"
-                      >Создать</b-button
-                    >
+                      ><span v-show="!loading"> Создать </span>
+                      <div
+                        v-show="loading"
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                      >
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </b-button>
                     <b-button variant="dark">Cancel</b-button>
                   </div>
                 </form>
@@ -80,11 +87,13 @@ export default {
       name: "",
       source: "",
       description: "",
+      loading: false,
     };
   },
   methods: {
     async update() {
       let self = this;
+      this.loading = true;
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/sources/store", {
@@ -96,10 +105,11 @@ export default {
           .then((response) => {
             if (response.status) {
               console.log("Вызвали алерт");
-
+              this.loading = false;
+              this.$router.push({ path: `/sources/source/${this.$route.params.id}` });
             } else {
               console.log("Не работает");
-              console.log(response.status);
+              this.loading = false;
             }
           })
           .catch(function (error) {

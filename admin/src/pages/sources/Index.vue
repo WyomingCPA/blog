@@ -89,6 +89,11 @@ export default {
       loading: false,
     };
   },
+  filters: {
+    deleteTagStyle: function (value) {
+      return value.replace("<style([\\s\\S]+?)</style>", "");
+    },
+  },
   methods: {
     getSources() {
       let self = this;

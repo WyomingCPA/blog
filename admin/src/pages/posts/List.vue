@@ -85,6 +85,7 @@ export default {
   components: {},
   data() {
     return {
+      loading: false,
       idPost: "",
       items: Array,
       infoModal: {

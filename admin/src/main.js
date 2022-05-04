@@ -13,7 +13,7 @@ Vue.config.performance = true
 
 axios.defaults.withCredentials = true
 Vue.config.productionTip = false
-//axios.defaults.baseURL = 'http://localhost/blog/public'
+//axios.defaults.baseURL = 'http://localhost/blog/public';
 axios.defaults.baseURL = 'http://simpleitrunner.ru/';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

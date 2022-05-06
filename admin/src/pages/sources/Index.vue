@@ -46,7 +46,7 @@
                         <a :href="item.source" target="_blank"
                           ><h6 class="preview-subject">{{ item.name }}</h6></a
                         >
-                        <p class="mb-0" v-html="item.description"></p>
+                        <p class="mb-0" v-html="$options.filters.deleteTagStyle(item.description)"></p>
                       </div>
                       <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                         <p class="text-muted">{{ item.updated_at }}</p>
@@ -91,7 +91,7 @@ export default {
   },
   filters: {
     deleteTagStyle: function (value) {
-      return value.replace("<style([\\s\\S]+?)</style>", "");
+      return value.replace(/<span[^>]*>([^<]+)<\/span>/g, '$1');
     },
   },
   methods: {

@@ -142,7 +142,7 @@ export default {
             }
             return { value: category.id, text: category.title };
           });
-          
+
           self.selectedStatus = response.data.post.status;
         })
         .catch(function (error) {
@@ -165,7 +165,7 @@ export default {
           })
           .then((response) => {
             if (response.status) {
-              console.log("Вызвали алерт");
+              this.makeToast('success');
               self.loading = false;
             } else {
               console.log("Не работает");
@@ -177,6 +177,13 @@ export default {
             console.log(response);
             console.error(error);
           });
+      });
+    },
+    makeToast(variant = null) {
+      this.$bvToast.toast("Данные успешно обновлены", {
+        title: `${variant || "default"}`,
+        variant: variant,
+        solid: true,
       });
     },
   },

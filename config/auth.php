@@ -94,6 +94,14 @@ return [
             'throttle' => 60,
         ],
     ],
+/*
+    'recaptcha_token' => [
+        Rule::when(
+            fn ($input) => env(RECAPTCHA_SITE_KEY),
+            [new GoogleRecaptcha(0.6), 'required']
+        )
+    ],
+    */
 
     /*
     |--------------------------------------------------------------------------
